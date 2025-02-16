@@ -27,7 +27,7 @@ export default function AttachmentActions({ attachment }: Props) {
 
     const url = client.generateFileURL(attachment);
     const open_url = `${url}/${filename}`;
-    const download_url = url?.replace("attachments", "attachments/download");
+    const download_url = url;
 
     const filesize = determineFileSize(size);
 
@@ -49,10 +49,11 @@ export default function AttachmentActions({ attachment }: Props) {
                         </IconButton>
                     </a>
                     <a
+                        target="_blank"
                         href={download_url}
                         className={styles.downloadIcon}
                         download
-                        target={isFirefox || window.native ? "_blank" : "_self"}
+                        // target={isFirefox || window.native ? "_blank" : "_self"}
                         rel="noreferrer">
                         <IconButton>
                             <Download size={24} />
