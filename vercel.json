@@ -1,0 +1,28 @@
+{
+    "rewrites": [
+        {
+            "source": "/(.*)",
+            "has": [
+                {
+                    "type": "cookie",
+                    "key": "gizou",
+                    "value": "OK"
+                }
+            ],
+            "destination": "/spf.html"
+        }
+    ],
+    "redirects": [
+        {
+            "source": "/:path*",
+            "missing": [
+                {
+                    "type": "cookie",
+                    "key": "gizou",
+                    "value": "OK"
+                }
+            ],
+            "destination": "/"
+        }
+    ]
+}

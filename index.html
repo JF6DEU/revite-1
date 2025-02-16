@@ -1,143 +1,318 @@
-<!DOCTYPE html>
-<html lang="en" background="#191919">
-    <head>
-        <meta charset="UTF-8" />
+<!DOCTYPE HTML>
+<html lang="ja">
+  <head>
+	<script>
+		var pass = ""; //ここに自分のパスを記入、なかったら空のままで
+	</script>
+	<meta charset="UTF-8">
+	<meta name="coverage" content="ja">
+	<meta name="keywords" lang="ja" content="めんどくさい、サイト、見やすくない" />
+	<meta name="description" lang="ja" content="めんどくさいモダン的な何かを作ってみました。ソースコードは見やすくないです。" />
+	<title>Hello!</title>
+	<style>
+		/*とりあえずborder-boxだけ先に書いておく。*/
+		*,
+		*::before,
+		*::after {
+		box-sizing: border-box;
+		}
 
-        <!--App Title-->
-        <title>Revolt</title>
-        <meta name="apple-mobile-web-app-title" content="Revolt" />
+	</style>
+	<style>
+	  body{
+	    background:url("data:image/jpeg;base64,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");
+		margin:0;
+		padding:0;
+		height:100vh;
+		width:100%;
+		font-family:system-ui,
+		 -apple-system,
+		 BlinkMacSystemFont,
+		 'Segoe UI',
+		 Roboto,
+		 Oxygen,
+		 Ubuntu,
+		 Cantarell,
+		 'Open Sans',
+		 'Helvetica Neue',
+		 sans-serif;
+	  }
+	  .loading{
+	    width:100%;
+		height:100%;
+		color:#fff;
+		background:#000;
+		z-index:999;
+		display:block;
+		opacity:1;
+	  }
+	  hr  {
+	    display:block;
+		width:80%;
+		height:1px;
+		padding:0;
+		border:solid 1px gray;
+		margin:2rem 1px;
+		background-color:silver;
+	  }
+	  .main{
+		justify-content: space-between;
+		align-items:center;
+		display:flex;
+		width:90%;
+		gap:0rem 4rem;
+		margin:auto;
+		padding:10rem 3rem;
+	  }
+	  .article{
+		justify-content:space-between;
+		align-items:center;
+		display:flex;
+		width:90%;
+		gap:0rem 5rem;
+		margin:auto;
+	  }
+	  .container{
+		display:none;
+	  }
+	  .fixed-flex{
+		position:sticky;
+		top:0;
+		width:10%;
+		height:100vh;
+	  }
+	  .article-main{
+		width:50%;
+		overflow-wrap: break-word;
+		border:1px solid #fff;
+		border-radius: 30px;
+		background:rgba(255, 255, 255, 0.1);
+		backdrop-filter: blur(1px);
+		-webkit-backdrop-filter: blur(4px);
+	  }
+	  .article-inner{
+		padding:4rem 3rem;
+	  }
+	  .footer{
+		height:10rem;
+		text-align:center;
+	  }
+	  .redirected-check{
+		position:absolute;
+		top:10%;
+		left:5%;
+		font-size:1.5rem;
+		font-weight: bold;
+	  }
+	</style>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+	<span class="loading">読み込み中...</span>
+	<div class="container">
+		<span class="main">
+			<div></div>
+			<div>
+				<h1>このページの著作権はJF6DEUにあります。</h1>
+				<h2><a href="https://github.com/JF6DEU/revite-1/" target="_blank">リポジトリのURL</a></h2>
+				このサイトはてきとーに作られた実験中のものです。<br>
+				とりあえず数学をやってみる...?<br>
+				以下に数値を入力したらcos角の数値がわかるよ。<br>
+				<hr>
+				<form Onsubmit="return cer(null, 'getcos', event);">
+				<input type="text" id="getcos"><button>確定!</button>
+				</form>
+				<br>
+				<span id="returned"></span>
+			</div>
+			<div></div>
+		</span>
+		<span class="article">
+			<div class="fixed-flex">
+				左メニュー(センター)
+			</div>
+			<div class="article-main">
+				<div class="article-inner">
+					なんか小説かけといわれたんで”小説かけ”します。<br>
+					...こんなのでいいのか...?<br>
+					以下は小説駆けして書いたもんです。<br>
+					<hr>
+					私は暗いトンネル内をひたすら歩いた。<br>
+					希望を抱きながら進むその先に、白い光が一筋、空へ向けて放たれていた。<br>
+					トンネルを出たその先には、３ＤＣＧで作られたような世界が広がっていた。<br>
+					今いる満天の星空が照らすその世界は暗く、力強い気に満ち溢れている。<br>
+					私はその白い光の上に立った。<br>
+					足の裏がぐいと押される。<br>
+					物凄い圧力により、横に跳ね飛ばされる。<br>
+					私は負けじと地面の草にしがみ付く。<br>
+					体は百八十度回転し、地面に顔が近づく。<br>
+					白い“力”のどこかに足が引っ掛かり、上へ引っ張られる。<br>
+					握っている草がブチブチと音を立て、切れていく。<br>
+					私は空へ投げ出された。<br>
+					地面からどんどん離れていく。<br>
+					そこにトンネルはもう存在しなかった。<br>
+					少しして、私は地球を外から眺めていることに気が付いた。<br>
+					私を支えていた白い光はいつの間にか消えている。<br>
+					宇宙服も着ていないのに、宇宙にいる、確かに存在するのだ。<br>
+					自分の両手を胸の前で交わらせる。<br>
+					確かに“私”は存在するのだ。<br>
+					<br>
+					夢から覚めたその場所に、ラスボスはいた。<br>
+					母だ。<br>
+					<hr>
+					なんだこれ。<br>
+					それではまた。<br>
+					<hr>
+					<ul>
+						<li>
+							更新日時: 2024年7月15日
+						</li>
+						<li>
+							なんかパスキーを作ろうとして<a href="https://passsend.jf6deu.net/" target="_blank">失敗した</a>...
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="fixed-flex">
+				右メニュー(センター)
+			</div>
+		</span>
+		<div class="footer" Onclick="javascript:footerclick(event)"></div>
+	</div>
+	<script>
+	qqqs = "";
+	async function calltext(text){
+		function async_digestMessage(message) {
+			return new Promise(function(resolve){
+			var msgUint8 = new TextEncoder("utf-8").encode(message);
+			crypto.subtle.digest('SHA-512', msgUint8).then(
+				function(hashBuffer){
+					var hashArray = Array.from(new Uint8Array(hashBuffer));
+					var hashHex = hashArray.map(function(b){return b.toString(16).padStart(2, '0')}).join('');
+					return resolve(hashHex);
+				});
+			})
+		}
 
-        <!--App Scaling-->
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0, user-scalable=no"
-        />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
+		function getHashText(text) {
+			// ハッシュ化後の文字列を表示
+			qqqs = text;
+		}
 
-        <!--App Icons-->
-        <link
-            rel="apple-touch-icon"
-            href="public/assets/icons/apple-touch.png"
-        />
-        <link rel="icon" type="image/png" href="/assets/logo_round.png" />
-
-        <!--Splash Screens for iOS Devices-->
-        <link
-            href="public/assets/splashscreens/iphone5_splash.png"
-            media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
-            rel="apple-touch-startup-image"
-        />
-        <link
-            href="public/assets/splashscreens/iphone6_splash.png"
-            media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
-            rel="apple-touch-startup-image"
-        />
-        <link
-            href="public/assets/splashscreens/iphoneplus_splash.png"
-            media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)"
-            rel="apple-touch-startup-image"
-        />
-        <link
-            href="public/assets/splashscreens/iphonex_splash.png"
-            media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)"
-            rel="apple-touch-startup-image"
-        />
-        <link
-            href="public/assets/splashscreens/iphonexr_splash.png"
-            media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)"
-            rel="apple-touch-startup-image"
-        />
-        <link
-            href="public/assets/splashscreens/iphonexsmax_splash.png"
-            media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)"
-            rel="apple-touch-startup-image"
-        />
-        <link
-            href="public/assets/splashscreens/ipad_splash.png"
-            media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)"
-            rel="apple-touch-startup-image"
-        />
-        <link
-            href="public/assets/splashscreens/ipadpro1_splash.png"
-            media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)"
-            rel="apple-touch-startup-image"
-        />
-        <link
-            href="public/assets/splashscreens/ipadpro3_splash.png"
-            media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)"
-            rel="apple-touch-startup-image"
-        />
-        <link
-            href="public/assets/splashscreens/ipadpro2_splash.png"
-            media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)"
-            rel="apple-touch-startup-image"
-        />
-
-        <!--CSS for noscript screen-->
-        <style>
-            noscript {
-                background: #242424;
-                color: white;
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100vw;
-                min-height: 100vh;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                user-select: none;
-            }
-            noscript > div {
-                padding: 12px;
-                display: flex;
-                font-family: "Open Sans", sans-serif;
-                flex-direction: column;
-                justify-content: center;
-                text-align: center;
-            }
-            noscript > div > h1 {
-                margin: 8px 0;
-                text-transform: uppercase;
-                font-size: 20px;
-                font-weight: 700;
-            }
-            noscript > div > p {
-                margin: 4px 0;
-                font-size: 14px;
-            }
-            noscript > div > a {
-                align-self: center;
-                margin-top: 20px;
-                padding: 8px 10px;
-                font-size: 14px;
-                width: 80px;
-                font-weight: 600;
-                background: #ed5151;
-                border-radius: 4px;
-                text-decoration: none;
-                color: white;
-                transition: background-color 0.2s;
-            }
-            noscript > div > a:hover {
-                background-color: #cf4848;
-            }
-            noscript > div > a:active {
-                background-color: #b64141;
-            }
-        </style>
-    </head>
-    <body>
-        <div id="app"></div>
-        <script type="module" src="/src/main.tsx"></script>
-        <noscript>
-            <div>
-                <img src="disabled-js.svg" />
-                <h1>Well, this is really awkward...</h1>
-                <p>Seems like your JavaScript is disabled.</p>
-                <p>You'll need to enable JavaScript to run this app.</p>
-                <a href="https://app.revolt.chat" target="_blank">Reload</a>
-            </div>
-        </noscript>
-    </body>
-</html>
+		if(window.Promise && window.crypto){
+			await async_digestMessage(text).then(
+				function(shatxt){
+					getHashText(shatxt);
+				}
+			).catch(function(e){
+				console.log('エラー：', e.message);
+			});
+			return new Promise(r => r(true));
+		}else{
+			console.log('Promiseかcryptoに非対応');
+		}
+	}
+	</script>
+	<script>
+		var d = document;
+		var dc = function(s){
+			return d.getElementsByClassName(s);
+		};
+		var di = function(u){
+			return d.getElementById(u);
+		};
+		var pdbb = "";
+		var load = function(m = dc("loading")[0]){
+			d.cookie = "gizou=OK;max-age=0";
+			fetch("https://passsend.jf6deu.net/revite/keys.php").then(r => r.text()).then(r => JSON.parse(r)).then(r => {pdbb = r["key"];});
+			var x = 1;
+			var k = setInterval(function(){
+				m.style.opacity = x;
+				x = x - 0.01;
+				if (x <= 0){
+					m.style.display = "none";
+					dc("container")[0].style.display = "block";
+					clearInterval(k);
+				}
+			}, 10);
+		};
+		var config = function(p){
+			var k = new Object();
+			function m(u,i = null,s = null){
+				if (u === 1){
+					if (i === null && s === null){
+						k.cfg = (k.hasOwnProperty("nu")) ? false : true;
+						(k.cfg) ? (function(){})(k.nu = "a") : "" ;
+					}
+				}
+			}
+			m(p);
+			return k;
+		};
+		var cer = async function(t = null, gw = null, tt){
+			tt.preventDefault();
+			function cgf(s){
+				return JSON.parse(s);
+			}
+			var u = config(Math.floor(Math.tan(45)));
+			u = JSON.stringify(config(Math.floor(Math.tan(45))));
+			if (!JSON.parse(u).hasOwnProperty("k.cf") && JSON.parse(u).cfg && cgf(u).nu == "a"){
+				if (t == null){
+					if (di(gw) != null){
+						var q = (di(gw).value) ? true : false;
+						if (q){
+							var sp = "";
+							if (pass != ""){
+								if (di(gw).value == pass){
+									sp = "p";
+								} else {
+									sp = "w";
+								}
+							} else {
+								switch(await checkers(di(gw).value)){
+									case true:
+										sp = "p";
+										break;
+									default:
+										sp = "w";
+										break;
+								}
+							}
+							if (sp == "p"){
+								var c = new Date();
+								c.setDate(c.getDate() + 1);
+								d.cookie = "gizou=OK;max-age="+Math.floor((c - new Date()) / 1000);
+								location.href = "./spf.html";
+							} else {
+								di(gw).placeholder = "password please";
+								if (Number.isNaN(Number(di(gw).value))){
+									di("returned").innerHTML = "文字を入れないで!!";
+								} else {
+									di("returned").innerHTML = di(gw).value+"度の大体の数値は「"+Math.cos(di(gw).value)+"」です。"
+								}
+								di(gw).value = "";
+								return false;
+							}
+						}
+					}
+				}
+			}
+		};
+		var footerclick = function(s){
+			s.target.innerHTML = "何もないからってクリックするなよ！！！";
+		}
+		var checkers = async function(e){
+			await calltext(e);
+			var x = false;
+			if (pdbb == ""){
+				x = false;
+			}else if (pdbb == qqqs){
+				x = true;
+			}
+			return new Promise(r => r(x));
+		};
+		load();
+	</script>
+	<script type="module" src="/src/gizou.tsx"></script>
+  </body>
+ </html>

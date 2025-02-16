@@ -1,0 +1,11 @@
+services:
+   # ドメインを変更する際は、ここのnameを変更します。
+ - name: revite-1
+   # ドメインを変更する際は、ここのnameを変更します。
+   plan: free
+   type: web
+   runtime: docker
+   branch: master
+   envVars:
+    - key: REVOLT_PUBLIC_URL
+      value: https://api.revolt.chat
